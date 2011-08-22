@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  encrypted_password :string(255)
+#
+
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation 
@@ -14,17 +26,17 @@ class User < ActiveRecord::Base
                        :confirmation => true,
                        :length => {:within => 6..40}
   
+  before_save :encrypt_password
+  
+  private 
+  
+    def encrypt_password
+      self.encrypted_password = encrypt(password)
+    end
+   
+   def encrypt(string)
+     string #not te final implementation
+   end
+   
+    
 end
-
-# == Schema Information
-#
-# Table name: users
-#
-#  id                 :integer         not null, primary key
-#  name               :string(255)
-#  email              :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  encrypted_password :string(255)
-#
-
