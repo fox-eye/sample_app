@@ -11,7 +11,8 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 RSpec.configure do |config|
   
 def test_sign_in(user)
-  controller.sign_in(user)
+  #controller.sign_in(user)
+  controller.current_user = user
 end
 
 
